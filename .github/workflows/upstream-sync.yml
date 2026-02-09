@@ -1,0 +1,22 @@
+name: Sync with upstream
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # every 6 hours
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync fork with upstream
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
+        with:
+          upstream_repository: digitalmethodsinitiative/zeeschuimer
+          upstream_branch: master
+          target_branch: master
+          
